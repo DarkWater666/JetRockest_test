@@ -1,0 +1,62 @@
+h1 Football Forwards Statistics
+
+a href='/' Return home
+
+h2
+  | Statistic by rate&nbsp;"
+  = @rate.name
+  | "
+
+h3 Check player by current rate in last 5 matches
+
+form#check_player name="static_by_club"
+  label for="check_club_id" Select club:&nbsp;
+  select#select_club required='true' name="check_club_id" onchange="getClub(this)"
+    option value="0"
+    - @clubs.each do |club|
+      option value="#{club.id}" = club.name
+  span&nbsp;
+  span.hidden
+    label for="check_player_id" Select player:&nbsp;
+    select#select_player required='true' name="check_player_id"
+    span&nbsp;
+    input.hidden type="text" name="check_rate_id" required='true' value= @rate.id
+    input.blue type="submit" value="CHECK"
+#check_result
+
+br
+hr
+
+h3
+  | Best 10 players by current rate average per match
+
+form#post_statistic name="static_by_club" action="/statistic/#{@rate.id}"
+  label for="club_id" by club:&nbsp;
+  select required='true' name="club_id"
+    option value="0" by all clubs
+    - @clubs.each do |club|
+      - selected = params['club_id'].to_i == club.id
+      option value="#{club.id}" selected=selected = club.name
+  span&nbsp;
+  input.blue type="submit" value="FIND"
+
+- if @players.size.zero?
+  div No results
+
+- else
+  h4
+    = @total
+    | &nbsp;players fulfilled the conditions
+
+  table cellspacing="0" cellpadding="0"
+    tr
+      th
+      th ID
+      th Name
+      th Club
+    - @players.each_with_index do |player, index|
+      tr
+        td = index + 1
+        td = player.id
+        td = player.name
+        td = @clubs.find { |club| club.id == player.club_id }.name

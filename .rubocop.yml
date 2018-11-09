@@ -1,0 +1,27 @@
+AllCops:
+  Exclude:
+    - bin/**/*
+    - db/schema.rb
+    - db/seeds/**/*
+    - db/seeds.rb
+Style/FrozenStringLiteralComment:
+  Enabled: false
+Style/Documentation:
+  Enabled: false
+Rails/HttpPositionalArguments:
+  Enabled: false
+Rails/ApplicationRecord:
+  Enabled: false
+Rails:
+  Enabled: true
+Metrics/AbcSize:
+  Max: 25
+Metrics/LineLength:
+  Max: 120
+Metrics/MethodLength:
+  Max: 25
+Metrics/BlockLength:
+  Exclude:
+    - 'Rakefile'
+    - '**/*.rake'
+    - 'spec/**/*.rb'

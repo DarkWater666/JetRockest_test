@@ -1,0 +1,20 @@
+-
+  name: Accurate passes greater then 49%
+  stat: accurate_passes / passes
+  value: '> 0.49'
+-
+  name: More than 4 shots
+  stat: shots
+  value: '> 4'
+-
+  name: Scored at least one goal
+  stat: goals
+  value: '> 0'
+-
+  name: Ran more than 10km
+  stat: ran
+  value: '> 10'
+-
+  name: Played at least 70 minutes
+  stat: minutes
+  value: '> 69'

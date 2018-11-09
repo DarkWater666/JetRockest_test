@@ -1,0 +1,41 @@
+h1 This is a home page for Football Forwards Statistics
+
+h3 Create new rate
+
+select#select_stat.hidden required='true' name="formula[]"
+  - @stat_attr.each do |stat|
+    option = stat
+
+input#text_stat.hidden.mini type="text" name="formula[]" required='true'
+
+form#post_rate name="rate_create" method="POST" action="/rates"
+  label for="name" Name:&nbsp;
+  input type="text" name="name" required='true'
+  br
+  label for="formula[]" Statistic by:&nbsp;
+  input#delete_before.hidden.red type="button" value="Remove Last"
+  input.add_to_formula.green data-type="select" type="button" value="Add Statistic Attribute"
+  input.add_to_formula.green data-type="input" type="button" value="Add Text Field"
+  br
+  label for="value" Matching:&nbsp;
+  input type="text" name="value" required='true'
+  br
+  input.blue type="submit" value="CREATE"
+
+hr
+
+- if @rates.present?
+  h2 Best players by rates for all matches
+  ul
+    - @rates.each do |rate|
+      li
+        a href="/statistic/#{rate.id}" = rate.name
+
+  hr
+
+- if @stat_attr.present?
+  .hidden
+    h2 Statistics by:
+    ul
+      - @stat_attr.each do |name, attribute|
+        li = name
